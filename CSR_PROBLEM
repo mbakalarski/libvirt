@@ -1,0 +1,4 @@
+Feb  6 17:41:47.348: %PMAN-5-EXITACTION: F0/0: pvp: Process manager is exiting: process exit with reload fru code
+Feb  6 17:41:52.046: %PMAN-5-EXITACTION: R0/0: pvp: Process manager is exiting: reload fru action requested
+
+

@@ -1,0 +1,18 @@
+virt-install                    \
+     --connect=qemu:///system   \
+     --name=csr-00              \
+     --os-variant=rhel4.9       \
+     --arch=x86_64              \
+     --cpu host                 \
+     --vcpus=1,sockets=1,cores=1,threads=1   \
+     --hvm                      \
+     --ram=4096                 \
+     --import                   \
+     --disk path=/home/mbk/LIBVIRT/csr-00.qcow2,bus=virtio,format=qcow2   \
+     --disk path=/home/mbk/LIBVIRT/csr_config.iso,device=cdrom,bus=ide    \
+     --network bridge=virbr0,model=virtio                        \
+     --network bridge=virbr0,model=virtio                        \
+     --network bridge=virbr0,model=virtio                        \
+     --network bridge=virbr0,model=virtio                        \
+     --noreboot
+
