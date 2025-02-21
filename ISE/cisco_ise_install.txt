@@ -1,30 +1,33 @@
-https://community.cisco.com/t5/security-knowledge-base/ise-zero-touch-provisioning-ztp/ta-p/4541606#toc-hId-335930740
+images, full iso, patches
+	https://software.cisco.com
+	eval 90 days
+(można robić backup bazy, instalacja, odzysk z bazy)
+
+https://community.cisco.com/t5/security-knowledge-base/ise-zero-touch-provisioning-ztp/ta-p/4541606
 
 * KVM ISO 
 
+1) przygotować ise_config.img
+można tu wstawić patches ale trzeba zrobić serwer, bo z file:// się nie da
+Only TFTP, HTTP, HTTPS and NFS
+
+
+2)
 qemu-img create -f qcow2 cisco-ise-01.qcow2 300G
 
+3)
 virt-install --name ise-01 \
 --arch x86_64 --cpu host --vcpus 2 --ram 4096 \
 --osinfo rhel8.8 \
 --hvm \
 --virt-type kvm \
 --cdrom ~/LIBVIRT/ise-3.4.0.608a.SPA.x86_64.iso \
---disk ~/LIBVIRT/ise_config.img,device=cdrom \
 --disk ~/LIBVIRT/cisco-ise-01.qcow2 \
+--disk ~/LIBVIRT/ise_config.img,device=cdrom \
 --graphics none \
 --console pty,target_type=serial
 
 
-#--extra-args 'console=ttyS0,115200n8 serial'
-
-
-Przy pierwszym prompcie (boot:) wpisałem "2" i "ENTER"
-
-# Ale czy ta "2" potrzebna ?
-# Może tak, w dokumentacji jest installer menu
-
-https://www.cisco.com/c/dam/en/us/td/i/400001-500000/430001-440000/437001-438000/437694.jpg
-
-[2] Cisco ISE Installation (Serial Console)
+# boot:
+# poczekaj 150s na ZTP, nic nie naciskać
 
