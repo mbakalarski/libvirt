@@ -8,7 +8,7 @@ https://community.cisco.com/t5/security-knowledge-base/ise-zero-touch-provisioni
 * KVM ISO 
 
 1) przygotować ise_config.img
-można tu wstawić patches ale trzeba zrobić serwer, bo z file:// się nie da
+wg doca można tu wstawić patches ale trzeba zrobić serwer, bo z file:// się nie da
 Only TFTP, HTTP, HTTPS and NFS
 
 
