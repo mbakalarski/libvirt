@@ -17,7 +17,7 @@ qemu-img create -f qcow2 cisco-ise-01.qcow2 300G
 
 3)
 virt-install --name ise-01 \
---arch x86_64 --cpu host --vcpus 2 --ram 4096 \
+--arch x86_64 --cpu host --vcpus 4 --ram 8192 \
 --osinfo rhel8.8 \
 --hvm \
 --virt-type kvm \
@@ -30,4 +30,12 @@ virt-install --name ise-01 \
 
 # boot:
 # poczekaj 150s na ZTP, nic nie naciskać
+
+rano :) (w logach >4h)
+weui https OK
+zmiana hasla dla admin (teraz jak w ise_config.img i dodatk. 4)
+
+zatrzymanie:
+application stop ise
+halt
 
