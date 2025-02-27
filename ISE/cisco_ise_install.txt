@@ -11,6 +11,10 @@ https://community.cisco.com/t5/security-knowledge-base/ise-zero-touch-provisioni
 wg doca można tu wstawić patches ale trzeba zrobić serwer, bo z file:// się nie da
 Only TFTP, HTTP, HTTPS and NFS
 
+na hoście warto wpisać do /etc/hosts:
+192.168.122.100 ise-01.local.net
+
+
 
 2)
 qemu-img create -f qcow2 cisco-ise-01.qcow2 300G
@@ -33,9 +37,18 @@ virt-install --name ise-01 \
 
 rano :) (w logach >4h)
 weui https OK
-zmiana hasla dla admin (teraz jak w ise_config.img i dodatk. 4)
+zmiana hasla dla admin (ale tylko GUI - teraz jak w ise_config.img i dodatk. 4 albo 5)
 
 zatrzymanie:
 application stop ise
 halt
+
+#####
+https://community.cisco.com/t5/network-access-control/ise-admin-cli-password-change/td-p/2593514
+
+The ISE Admin accounts got GUI and CLI are separate accounts.  The passwords are synced during initial setup.  All other times, it must be done manually.
+The only password that can be changed through the GUI is the GUI Admin Password.
+Both passwords can be changed in CLI, but with vastly different commands.
+To change the CLI Admin password, simply enter the command password
+To change the GUI Admin password, the command is application reset-passwd ise admin newpassword
 
