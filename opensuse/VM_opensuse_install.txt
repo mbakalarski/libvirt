@@ -1,59 +1,48 @@
+wget https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-DVD-x86_64-Media.iso
+wget https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-DVD-x86_64-Media.iso.sha256
+qemu-img create -f qcow2 opensuse-01.qcow2 20G
+
+virt-install --virt-type kvm --name opensuse-01 \
+--osinfo opensuse15.5 \
+--cpu host \
+--memory 2048 --vcpu 2 \
+--cdrom openSUSE-Leap-15.6-DVD-x86_64-Media.iso \
+--disk ./opensuse-01.qcow2 \
+--hvm --debug \
+--graphics vnc
+
+
+##
 wget https://download.opensuse.org/distribution/leap-micro/6.1/appliances/openSUSE-Leap-Micro.x86_64-Default-qcow.qcow2
 wget https://download.opensuse.org/distribution/leap-micro/6.1/appliances/openSUSE-Leap-Micro.x86_64-Default-qcow.qcow2.sha256
 cp openSUSE-Leap-Micro.x86_64-Default-qcow.qcow2 opensuse-01.qcow2
 #qemu-img resize opensuse-01.qcow2 20G
 
-
-#wget https://download.opensuse.org/distribution/leap-micro/6.1/appliances/iso/openSUSE-Leap-Micro.x86_64-Default-SelfInstall.iso
-#wget https://download.opensuse.org/distribution/leap-micro/6.1/appliances/iso/openSUSE-Leap-Micro.x86_64-Default-SelfInstall.iso.sha256
-#qemu-img create -f qcow2 opensuse-01.qcow2 20G
-
-
-#wget https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-DVD-x86_64-Media.iso
-#wget https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-DVD-x86_64-Media.iso.sha256
-#qemu-img create -f qcow2 opensuse-01.qcow2 20G
-
-
-
-###
-
-#virt-install --virt-type kvm --name opensuse-01 \
-#--osinfo opensuse15.5 \
-#--boot bootmenu.enable=on,bios.useserial=on \
-#--memory 2048 --vcpu 2 \
-#--cdrom openSUSE-Leap-15.6-DVD-x86_64-Media.iso \
-#--disk ./opensuse-01.qcow2 \
-#--graphics vnc \
-#--console pty,target_type=serial \
-#--cpu host \
-#--hvm --debug
+virt-install --virt-type kvm --name opensuse-01 \
+--osinfo opensuse15.5 \
+--cpu host \
+--memory 2048 --vcpu 2 \
+--import --disk ./opensuse-01.qcow2 \
+--hvm --debug \
+--console pty,target_type=serial \
+--graphics vnc
 
 
 ##
-
-#virt-install --virt-type kvm --name opensuse-01 \
-#--osinfo opensuse15.5 \
-#--boot bootmenu.enable=on,bios.useserial=on \
-#--memory 2048 --vcpu 2 \
-#--cdrom openSUSE-Leap-Micro.x86_64-Default-SelfInstall.iso \
-#--disk ./opensuse-01.qcow2 \
-#--graphics vnc \
-#--console pty,target_type=serial \
-#--cpu host \
-#--hvm --debug
-
-##
+wget https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Media.iso
+wget https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-NET-x86_64-Media.iso.sha256
+qemu-img create -f qcow2 opensuse-01.qcow2 20G
 
 virt-install --virt-type kvm --name opensuse-01 \
 --osinfo opensuse15.5 \
---memory 2048 --vcpu 2 \
---import \
---disk ./opensuse-01.qcow2 \
---graphics vnc \
 --cpu host \
---hvm --debug
+--memory 2048 --vcpu 2 \
+--cdrom openSUSE-Leap-15.6-NET-x86_64-Media.iso \
+--disk ./opensuse-01.qcow2 \
+--hvm --debug \
+--graphics vnc
 
 ##
-
+##
 gvncviewer localhost
 
