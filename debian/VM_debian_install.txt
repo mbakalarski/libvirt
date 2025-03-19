@@ -1,16 +1,20 @@
-# wget https://cdimage.debian.org/images/cloud/bookworm/latest/debian-12-nocloud-amd64.qcow2
-# cp debian-12-nocloud-amd64.qcow2 debian-01.qcow2
-# qemu-img resize debian-01.qcow2 50G
+wget https://cdimage.debian.org/images/cloud/bookworm/latest/debian-12-nocloud-amd64.qcow2
+cp debian-12-nocloud-amd64.qcow2 debian-01.qcow2
+qemu-img resize debian-01.qcow2 20G
 
 
 virt-install --virt-type kvm --name debian-01 \
 --osinfo debian12 \
 --import \
 --memory 24576 --vcpu 8 \
---disk ~/LIBVIRT/debian-01.qcow2 \
+--disk ./debian-01.qcow2 \
 --graphics none \
 --console pty,target_type=serial \
 --cpu host \
 --vcpus cpuset=2-9 \
 --hvm --debug
+
+
+# user root, no password
+
 
