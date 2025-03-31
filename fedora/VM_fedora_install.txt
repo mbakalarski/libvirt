@@ -3,15 +3,18 @@ wget https://download.fedoraproject.org/pub/fedora/linux/releases/41/Server/x86_
 wget https://download.fedoraproject.org/pub/fedora/linux/releases/41/Server/x86_64/images/Fedora-Server-41-1.4-x86_64-CHECKSUM
 
 curl -O https://fedoraproject.org/fedora.gpg
-
 gpgv --keyring ./fedora.gpg Fedora-Server-41-1.4-x86_64-CHECKSUM
-
 sha256sum --ignore-missing -c Fedora-Server-41-1.4-x86_64-CHECKSUM
 
 
+# cp Fedora-Server-KVM-41-1.4.x86_64.qcow2 fedora-01.qcow2
+# qemu-img resize fedora-01.qcow2 20G
 
-cp Fedora-Server-KVM-41-1.4.x86_64.qcow2 fedora-01.qcow2
-qemu-img resize fedora-01.qcow2 20G
+backing_file="Fedora-Server-KVM-41-1.4.x86_64.qcow2"
+qemu-img create -f qcow2 -b ${backing_file} -F qcow2 fedora-01.qcow2 20G
+
+qemu-img create -f qcow2 fedora-02.qcow2 20G
+qemu-img create -f qcow2 fedora-03.qcow2 20G
 
 
 virt-install --virt-type kvm --name fedora-01 \
@@ -19,6 +22,8 @@ virt-install --virt-type kvm --name fedora-01 \
 --import \
 --memory 2048 --vcpu 2 \
 --disk ./fedora-01.qcow2 \
+--disk ./fedora-02.qcow2 \
+--disk ./fedora-03.qcow2 \
 --graphics none \
 --console pty,target_type=serial \
 --cpu host \

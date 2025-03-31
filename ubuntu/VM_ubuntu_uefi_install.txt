@@ -1,0 +1,21 @@
+wget https://cloud-images.ubuntu.com/oracular/current/oracular-server-cloudimg-amd64.img
+wget https://cloud-images.ubuntu.com/oracular/current/SHA256SUMS
+sha256sum -c --ignore-missing oracular-server-cloudimg-amd64.img SHA256SUMS
+
+cp oracular-server-cloudimg-amd64.img ubuntu-01.qcow2
+qemu-img resize ubuntu-01.qcow2 20G
+
+
+virt-install --virt-type kvm --name ubuntu-01 \
+--osinfo ubuntu24.10 \
+--import \
+--memory 2048 --vcpu 2 \
+--disk ./ubuntu-01.qcow2 \
+--graphics none \
+--console pty,target_type=serial \
+--cpu host \
+--hvm --debug \
+--boot loader=$(pwd)/OVMF.fd \
+--cloud-init
+
+#--boot loader=${HOME}/LIBVIRT/ubuntu/OVMF.fd \

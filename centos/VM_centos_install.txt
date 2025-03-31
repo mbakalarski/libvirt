@@ -2,10 +2,11 @@ wget https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-Gener
 wget https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-x86_64-10-latest.x86_64.qcow2.SHA256SUM
 sha256sum -c CentOS-Stream-GenericCloud-x86_64-10-latest.x86_64.qcow2.SHA256SUM
 
-cp CentOS-Stream-GenericCloud-x86_64-10-latest.x86_64.qcow2 centos-01.qcow2
-qemu-img resize centos-01.qcow2 20G
+backing_file="CentOS-Stream-GenericCloud-x86_64-10-latest.x86_64.qcow2"
+qemu-img create -f qcow2 -b ${backing_file} -F qcow2 centos-01.qcow2 20G
 
-qemu-img create centos-02.qcow2 20M
+qemu-img create -f qcow2 centos-02.qcow2 20G
+qemu-img create -f qcow2 centos-03.qcow2 20G
 
 
 virt-install --virt-type kvm --name centos-01 \
@@ -14,6 +15,7 @@ virt-install --virt-type kvm --name centos-01 \
 --memory 2048 --vcpu 2 \
 --disk ./centos-01.qcow2 \
 --disk ./centos-02.qcow2 \
+--disk ./centos-03.qcow2 \
 --graphics none \
 --console pty,target_type=serial \
 --cpu host \
