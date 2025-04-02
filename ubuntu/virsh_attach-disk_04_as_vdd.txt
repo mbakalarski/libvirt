@@ -1,0 +1,3 @@
+qemu-img create -f qcow2 ubuntu-04.qcow2 20G
+virsh attach-disk ubuntu-01 "$(pwd)/ubuntu-04.qcow2" vdd --subdriver qcow2
+

@@ -2,8 +2,11 @@ wget https://cloud-images.ubuntu.com/oracular/current/oracular-server-cloudimg-a
 wget https://cloud-images.ubuntu.com/oracular/current/SHA256SUMS
 sha256sum -c --ignore-missing oracular-server-cloudimg-amd64.img SHA256SUMS
 
-cp oracular-server-cloudimg-amd64.img ubuntu-01.qcow2
-qemu-img resize ubuntu-01.qcow2 20G
+backing_file="oracular-server-cloudimg-amd64.img"
+qemu-img create -f qcow2 -b ${backing_file} -F qcow2 ubuntu-01.qcow2 20G
+
+qemu-img create -f qcow2 ubuntu-02.qcow2 20G
+qemu-img create -f qcow2 ubuntu-03.qcow2 20G
 
 
 virt-install --virt-type kvm --name ubuntu-01 \
@@ -11,6 +14,8 @@ virt-install --virt-type kvm --name ubuntu-01 \
 --import \
 --memory 2048 --vcpu 2 \
 --disk ./ubuntu-01.qcow2 \
+--disk ./ubuntu-02.qcow2 \
+--disk ./ubuntu-03.qcow2 \
 --graphics none \
 --console pty,target_type=serial \
 --cpu host \
@@ -18,4 +23,3 @@ virt-install --virt-type kvm --name ubuntu-01 \
 --boot loader=$(pwd)/OVMF.fd \
 --cloud-init
 
-#--boot loader=${HOME}/LIBVIRT/ubuntu/OVMF.fd \
