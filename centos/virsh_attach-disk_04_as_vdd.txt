@@ -1,0 +1,7 @@
+DOMAIN=centos-01
+SOURCEFILE=centos-04.qcow2
+TARGET=vdd
+
+qemu-img create -f qcow2 $SOURCEFILE 20G
+virsh attach-disk $DOMAIN "$(pwd)/${SOURCEFILE}" $TARGET --subdriver qcow2
+

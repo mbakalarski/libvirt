@@ -5,3 +5,4 @@
 **/*.sha256
 **/OVMF.fd
 **/ovmf/
+**/*user-data
