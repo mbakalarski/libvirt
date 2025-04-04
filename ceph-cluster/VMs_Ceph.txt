@@ -29,15 +29,6 @@ done
 
 
 ###
-###
-virsh net-update default add ip-dhcp-host '<host name="ceph1" ip="192.168.122.101"/>' --live || true
-virsh net-update default add ip-dhcp-host '<host name="ceph2" ip="192.168.122.102"/>' --live || true
-virsh net-update default add ip-dhcp-host '<host name="ceph3" ip="192.168.122.103"/>' --live || true
-
-
-
-
-###
 for i in 1 2 3; do
 
 cat << EOT > ceph${i}-user-data
@@ -86,6 +77,15 @@ done
 
 # --debug 
 
+###
+###
+virsh net-destroy default
+virsh net-start default
 
-true
+###
+###
+virsh net-update default add ip-dhcp-host '<host name="ceph1" ip="192.168.122.101"/>' --live || true
+virsh net-update default add ip-dhcp-host '<host name="ceph2" ip="192.168.122.102"/>' --live || true
+virsh net-update default add ip-dhcp-host '<host name="ceph3" ip="192.168.122.103"/>' --live || true
+
 
