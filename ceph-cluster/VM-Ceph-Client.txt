@@ -1,0 +1,37 @@
+backing_file="CentOS-Stream-GenericCloud-x86_64-9-latest.x86_64.qcow2"
+qemu-img create -f qcow2 -b ${backing_file} -F qcow2 cephclient.qcow2 20G
+
+
+###
+PASSWORD=lab12345
+
+
+cat << EOT > cephclient-user-data
+#cloud-config
+
+chpasswd:
+  list: |
+    root:${PASSWORD}
+  expire: False
+
+runcmd:
+  - hostnamectl set-hostname cephclient
+  - #
+  - rm -f /etc/ssh/sshd_config.d/50-cloud-init.conf
+  - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+  - systemctl restart sshd
+  - #
+EOT
+
+
+virt-install --virt-type kvm --name cephclient \
+--osinfo centos-stream9 \
+--import \
+--memory 2048 --vcpu 2 \
+--disk ./cephclient.qcow2 \
+--graphics none \
+--console pty,target_type=serial \
+--cpu host \
+--hvm \
+--cloud-init user-data=./cephclient-user-data
+
