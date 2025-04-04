@@ -1,8 +1,9 @@
 **/*.iso
 **/*.qcow2
 **/*.img
-**/*.SHA256SUM
-**/*.sha256
+**/*SHA256SUM
+**/*sha256
 **/OVMF.fd
 **/ovmf/
 **/*user-data
+**/*-CHECKSUM

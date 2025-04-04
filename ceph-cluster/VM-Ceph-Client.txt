@@ -45,5 +45,6 @@ virt-install --virt-type kvm --name cephclient \
 
 
 # virsh reboot cephclient
+# virsh start cephclient
 # ssh-copy-id root@192.168.29.201
 
