@@ -16,11 +16,17 @@ chpasswd:
 
 runcmd:
   - hostnamectl set-hostname cephclient
+  - echo "192.168.29.100  ceph1" >> /etc/hosts
+  - echo "192.168.29.101  ceph2" >> /etc/hosts
+  - echo "192.168.29.102  ceph3" >> /etc/hosts
   - #
   - rm -f /etc/ssh/sshd_config.d/50-cloud-init.conf
   - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
   - systemctl restart sshd
   - #
+  - dnf update -y
+  - dnf install -y centos-release-ceph-pacific
+  - dnf install -y ceph ceph-radosgw
 EOT
 
 
