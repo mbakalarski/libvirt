@@ -29,9 +29,15 @@ virt-install --virt-type kvm --name cephclient \
 --import \
 --memory 2048 --vcpu 2 \
 --disk ./cephclient.qcow2 \
+--network network=ceph-cluster \
 --graphics none \
 --console pty,target_type=serial \
 --cpu host \
 --hvm \
 --cloud-init user-data=./cephclient-user-data
+
+
+
+# virsh reboot cephclient
+# ssh-copy-id root@192.168.29.201
 

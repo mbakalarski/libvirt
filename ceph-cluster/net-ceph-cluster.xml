@@ -12,6 +12,7 @@
       <host name='ceph1' ip='192.168.29.100'/>
       <host name='ceph2' ip='192.168.29.101'/>
       <host name='ceph3' ip='192.168.29.102'/>
+      <host name='cephclient' ip='192.168.29.201'/>
     </dhcp>
   </ip>
 </network>
