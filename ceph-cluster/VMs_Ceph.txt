@@ -29,6 +29,8 @@ done
 
 
 ###
+PASSWORD=lab12345
+
 for i in 1 2 3; do
 
 cat << EOT > ceph${i}-user-data
@@ -36,7 +38,7 @@ cat << EOT > ceph${i}-user-data
 
 chpasswd:
   list: |
-    root:lab12345
+    root:${PASSWORD}
   expire: False
 
 runcmd:
