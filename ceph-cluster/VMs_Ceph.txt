@@ -14,8 +14,8 @@ fi
 sha256sum -c CentOS-Stream-GenericCloud-x86_64-9-latest.x86_64.qcow2.SHA256SUM
 
 
-for i in 1 2 3; do virsh destroy ceph${i} || true ; done
-for i in 1 2 3; do virsh undefine ceph${i} --remove-all-storage || true ; done
+for i in 1 2 3; do virsh destroy ceph${i} 2>/dev/null || true ; done
+for i in 1 2 3; do virsh undefine ceph${i} --remove-all-storage 2>/dev/null || true ; done
 
 backing_file="CentOS-Stream-GenericCloud-x86_64-9-latest.x86_64.qcow2"
 
@@ -41,9 +41,9 @@ chpasswd:
 
 runcmd:
   - hostnamectl set-hostname ceph${i}
-  - echo "192.168.122.101  ceph1" >> /etc/hosts
-  - echo "192.168.122.102  ceph2" >> /etc/hosts
-  - echo "192.168.122.103  ceph3" >> /etc/hosts
+  - echo "192.168.29.100  ceph1" >> /etc/hosts
+  - echo "192.168.29.101  ceph2" >> /etc/hosts
+  - echo "192.168.29.102  ceph3" >> /etc/hosts
   - #
   - rm -f /etc/ssh/sshd_config.d/50-cloud-init.conf
   - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
@@ -58,6 +58,9 @@ EOT
 done
 
 ###
+virsh net-define net-ceph-cluster.xml 2>/dev/null || :
+virsh net-start ceph-cluster 2>/dev/null || :
+
 
 
 for i in 1 2 3; do
@@ -67,6 +70,7 @@ virt-install --virt-type kvm --name ceph${i} \
 --memory 4096 --vcpu 2 \
 --disk ./ceph${i}-01.qcow2 \
 --disk ./ceph${i}-02.qcow2 \
+--network network=ceph-cluster \
 --graphics none \
 --cpu host \
 --hvm \
@@ -79,13 +83,13 @@ done
 
 ###
 ###
-virsh net-destroy default
-virsh net-start default
+#virsh net-destroy ceph-cluster
+#virsh net-start ceph-cluster
 
 ###
 ###
-virsh net-update default add ip-dhcp-host '<host name="ceph1" ip="192.168.122.101"/>' --live || true
-virsh net-update default add ip-dhcp-host '<host name="ceph2" ip="192.168.122.102"/>' --live || true
-virsh net-update default add ip-dhcp-host '<host name="ceph3" ip="192.168.122.103"/>' --live || true
+#virsh net-update ceph-cluster add ip-dhcp-host '<host name="ceph1" ip="192.168.29.100"/>' --live || true
+#virsh net-update ceph-cluster add ip-dhcp-host '<host name="ceph2" ip="192.168.29.101"/>' --live || true
+#virsh net-update ceph-cluster add ip-dhcp-host '<host name="ceph3" ip="192.168.29.102"/>' --live || true
 
 
