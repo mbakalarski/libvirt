@@ -57,3 +57,7 @@ virt-install --virt-type kvm --name centos1 \
 --hvm \
 --cloud-init user-data=./centos1-user-data
 
+
+
+# ssh-copy-id root@...
+#
