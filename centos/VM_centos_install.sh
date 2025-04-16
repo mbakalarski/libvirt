@@ -2,6 +2,11 @@
 
 set -e
 
+echo !!! old centos1 VM and disks will be removed !!!
+read
+virsh destroy centos1 || true
+virsh undefine centos1 --remove-all-storage || true
+
 
 if [[ -f CentOS-Stream-GenericCloud-x86_64-10-latest.x86_64.qcow2 ]]; then :; else
 wget https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-x86_64-10-latest.x86_64.qcow2
@@ -39,6 +44,9 @@ runcmd:
   - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
   - systemctl restart sshd
   - #
+  - useradd -m -s /bin/bash student
+  - echo ${PASSWORD} | passwd -s student
+  - echo "student ALL=(ALL) ALL" >> /etc/sudoers
 EOT
 
 ###

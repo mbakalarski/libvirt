@@ -3,6 +3,13 @@
 set -e
 
 
+echo !!! old ubuntu1 VM and disks will be removed !!!
+read
+virsh destroy ubuntu1 || true
+virsh undefine ubuntu1 --remove-all-storage || true
+
+
+
 if [[ -f oracular-server-cloudimg-amd64.img ]]; then :; else
 wget https://cloud-images.ubuntu.com/oracular/current/oracular-server-cloudimg-amd64.img
 fi
@@ -42,6 +49,10 @@ runcmd:
   - find /etc/ssh/sshd_config.d/ /etc/ssh/sshd_config -type f -exec grep -l PasswordAuthentication {} \; -exec bash -c -- "echo 'PasswordAuthentication yes' | tee -a {}" \;
   - systemctl restart sshd
   - #
+  - #
+  - useradd -m -s /bin/bash student
+  - echo ${PASSWORD} | passwd -s student
+  - echo "student ALL=(ALL) ALL" >> /etc/sudoers
 EOT
 
 ###
@@ -63,5 +74,6 @@ virt-install --virt-type kvm --name ubuntu1 \
 
 
 # ssh-copy-id root@...
+# ssh-copy-id student@...
 #
 
