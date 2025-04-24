@@ -1,3 +1,13 @@
+#!/bin/bash
+
+set -e
+
+echo !!! old fedora1 VM and disks will be removed !!!
+read
+virsh destroy fedora1 || true
+virsh undefine fedora1 --remove-all-storage || true
+
+
 if [[ -f Fedora-Cloud-Base-Generic-41-1.4.x86_64.qcow2 ]]; then true; else
 wget https://download.fedoraproject.org/pub/fedora/linux/releases/41/Cloud/x86_64/images/Fedora-Cloud-Base-Generic-41-1.4.x86_64.qcow2
 fi
@@ -41,6 +51,9 @@ runcmd:
   - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
   - systemctl restart sshd
   - #
+  - useradd -m -s /bin/bash student
+  - echo ${PASSWORD} | passwd -s student
+  - echo "student ALL=(ALL) ALL" >> /etc/sudoers
 EOT
 
 ###
@@ -56,8 +69,9 @@ virt-install --virt-type kvm --name fedora1 \
 --graphics none \
 --console pty,target_type=serial \
 --cpu host \
---hvm --debug \
---cloud-init user-data=./fedora1-user-data
+--hvm \
+--cloud-init user-data=./fedora1-user-data \
+--boot bootmenu.enable=on,bios.useserial=on
 
 # virsh reboot fedora1
 # virsh start fedora1

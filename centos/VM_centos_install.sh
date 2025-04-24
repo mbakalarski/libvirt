@@ -2,6 +2,11 @@
 
 set -e
 
+
+PASSWORD=lab12345
+
+
+
 echo !!! old centos1 VM and disks will be removed !!!
 read
 virsh destroy centos1 || true
@@ -26,9 +31,6 @@ qemu-img create -f qcow2 centos1-03.qcow2 20G
 
 
 ###
-PASSWORD=lab12345
-
-
 cat << EOT > centos1-user-data
 #cloud-config
 
@@ -48,14 +50,13 @@ runcmd:
   - echo ${PASSWORD} | passwd -s student
   - echo "student ALL=(ALL) ALL" >> /etc/sudoers
 EOT
-
 ###
 
 
 virt-install --virt-type kvm --name centos1 \
---osinfo centos-stream9 \
+--osinfo centos-stream10 \
 --import \
---memory 2048 --vcpu 2 \
+--memory 8192 --vcpu 4 \
 --disk ./centos1-01.qcow2 \
 --disk ./centos1-02.qcow2 \
 --disk ./centos1-03.qcow2 \
@@ -63,7 +64,8 @@ virt-install --virt-type kvm --name centos1 \
 --console pty,target_type=serial \
 --cpu host \
 --hvm \
---cloud-init user-data=./centos1-user-data
+--cloud-init user-data=./centos1-user-data \
+--boot bootmenu.enable=on,bios.useserial=on
 
 
 

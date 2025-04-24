@@ -35,10 +35,10 @@ PASSWORD=lab12345
 cat << EOT > ubuntu1-user-data
 #cloud-config
 
-chpasswd:
-  expire: false
-  users:
-  - {name: root, password: ${PASSWORD}, type: text}
+#chpasswd:
+#  expire: false
+#  users:
+#  - {name: root, password: ${PASSWORD}, type: text}
 
 runcmd:
   - hostnamectl set-hostname ubuntu1
@@ -69,7 +69,7 @@ virt-install --virt-type kvm --name ubuntu1 \
 --console pty,target_type=serial \
 --cpu host \
 --hvm \
---boot loader=$(pwd)/OVMF.fd \
+--boot loader=$(pwd)/OVMF.fd,bootmenu.enable=on,bios.useserial=on \
 --cloud-init user-data=./ubuntu1-user-data
 
 
