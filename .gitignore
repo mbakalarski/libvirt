@@ -7,3 +7,4 @@
 **/ovmf/
 **/*user-data
 **/*-CHECKSUM
+**/*.hash
