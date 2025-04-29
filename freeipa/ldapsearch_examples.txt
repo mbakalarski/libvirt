@@ -1,0 +1,79 @@
+    9  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=com" -s sub"objectclass=*"
+   10  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -s sub"objectclass=*"
+   12  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -s sub"objectclass=*"
+   13  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" 
+   15  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" 
+   16  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -A
+   18  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -A
+   20  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -u
+   21  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local"
+   22  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -u
+   24  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -u
+   26  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local"
+   27  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" | less
+   36  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LLL
+   37  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -L
+   38  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LL
+   39  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -L
+   40  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LL
+   41  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LLL
+   42  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LLL dn
+   44  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LLL dn
+   46  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LLL dn
+   53  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" -LLL dc=local dc=example cn=accounts cn=groups
+   54  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" dc=local dc=example cn=accounts cn=groups
+   55  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "dc=local dc=example cn=accounts cn=groups"
+   56  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" sub"dc=local dc=example cn=accounts cn=groups"
+   57  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" sub"dc=local,dc=example,cn=accounts,cn=groups"
+   58  ldapsearch -x -H ldap://ipas.example.local -b "dc=local,dc=example,cn=accounts,cn=groups"
+   59  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "uid=admin"
+   61  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "uid=admin"
+   62  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local"
+   63  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "uid=admin"
+   64  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
+   65  ldapsearch -x -H ldap://ipas.example.local -b "cn=schema" -s base objectClasses
+   67  ldapsearch -x -H ldap://ipas.example.local -b "cn=schema" -s base objectClasses
+   68  ldapsearch -x -H ldap://ipas.example.local -b "cn=schema" -s base objectClasses -LLL
+   69  ldapsearch -x -H ldap://ipas.example.local -b "cn=schema" -s base objectClasses -L
+   70  ldapsearch -x -H ldap://ipas.example.local -b "cn=schema" -s base objectClasses -LLL
+   71  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
+   72  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" dn
+   74  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" dn
+   75  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" dn,id
+   76  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
+   77  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" dn,uid
+   78  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" dn
+   79  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" 
+   80  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid
+   81  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" 
+   82  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid,sn
+   83  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid
+   84  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" sn
+   85  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid sn
+   86  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid,sn
+   87  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid sn
+   89  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid sn
+   90  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" 
+   91  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid sn
+   92  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid sn gecos
+   94  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)" uid sn gecos
+   95  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
+   96  ldapsearch -x -H ldap://ipas.example.local -b "cn=compat,dc=example,dc=local" "(objectClass=posixAccount)"
+   98  ldapsearch -x -H ldap://ipas.example.local -b "cn=compat,dc=example,dc=local" "(objectClass=posixAccount)"
+   99  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
+  100  ldapsearch -x -H ldap://ipas.example.local -b "cn=compat,dc=example,dc=local" "(objectClass=posixAccount)"
+  101  ldapsearch -x -H ldap://ipas.example.local -b "cn=compat,dc=example,dc=local" "(objectClass=posixGroup)"
+  103  ldapsearch -x -H ldap://ipas.example.local -b "cn=compat,dc=example,dc=local" "(objectClass=posixGroup)"
+  107  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixGroup)"
+  109  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixGroup)"
+  112  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixGroup)"
+  116  ldapsearch -x -H ldap://ipas.example.local -b "cn=compat,dc=example,dc=local" "(objectClass=posixAccount)"
+  117  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
+  119  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
+  120  ldapsearch -x -H ldap://ipas.example.local -b "cn=users,cn=compat,dc=example,dc=local"
+  121  ldapsearch -x -H ldap://ipas.example.local -b "cn=users,cn=*,dc=example,dc=local"
+  122  ldapsearch -x -H ldap://ipas.example.local -b "cn=users,dc=example,dc=local"
+  124  ldapsearch -x -H ldap://ipas.example.local -b "cn=users,dc=example,dc=local"
+  126  ldapsearch -x -H ldap://ipas.example.local -b "cn=users,cn=*,dc=example,dc=local"
+  128  ldapsearch -x -H ldap://ipas.example.local -b "cn=users,cn=compat,dc=example,dc=local"
+  135  ldapsearch -x -H ldap://ipas.example.local -b "dc=example,dc=local" "(objectClass=posixAccount)"
