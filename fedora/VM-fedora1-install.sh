@@ -33,7 +33,7 @@ qemu-img create -f qcow2 fedora1-03.qcow2 20G
 
 
 ###
-PASSWORD=lab12345
+source .env
 
 
 cat << EOT > fedora1-user-data

@@ -56,6 +56,9 @@ runcmd:
   - #
   - dnf install ipa-client openldap-clients -y
   - ipa-client-install --mkhomedir --server=ipas.example.local --domain=example.local --realm=EXAMPLE.LOCAL --no-ntp -p admin -w $PASSWORD --all-ip-addresses --force-join -U
+  - #
+  - dnf install xorg-x11-xauth -y
+  - dnf install wireshark -y
   - reboot
 EOT
 ###

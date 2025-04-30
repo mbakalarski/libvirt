@@ -3,7 +3,7 @@
 set -e
 
 
-PASSWORD=lab12345
+source .env
 
 
 

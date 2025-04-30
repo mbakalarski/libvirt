@@ -3,7 +3,7 @@ qemu-img create -f qcow2 -b ${backing_file} -F qcow2 cephclient.qcow2 20G
 
 
 ###
-PASSWORD=lab12345
+source .env
 
 
 cat << EOT > cephclient-user-data
