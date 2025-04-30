@@ -55,6 +55,10 @@ runcmd:
   - #
   - dnf -y install ipa-server bind-dyndb-ldap ipa-server-dns
   - ipa-server-install --setup-dns --no-forwarders -p ${PASSWORD} -a ${PASSWORD} -r EXAMPLE.LOCAL --hostname=ipas.example.local -U
+  - #
+  - dnf install firewalld -y
+  - for i in dns ntp http https ldap ldaps kerberos kpasswd ; do firewall-cmd --add-service \$i --permanent ; done
+  - firewall-cmd --reload
   - reboot
 EOT
 ###
@@ -73,14 +77,14 @@ virt-install --virt-type kvm --name ipas.example.local \
 --boot bootmenu.enable=on,bios.useserial=on
 
 
-
-# ssh-copy-id root@...
-#
-#
-
 IPA_SERVER_IP=$(virsh net-dhcp-leases default | awk '/ipas/ {printf $5}' | cut -d/ -f1)
 sed -i 's/^IPA_SERVER_IP=\(.*\)/#IPA_SERVER_IP=\1/' .env
 echo IPA_SERVER_IP=${IPA_SERVER_IP} >> .env
 
+
 virsh start ipas.example.local --console
 
+
+# ssh-copy-id root@...
+#
+#
